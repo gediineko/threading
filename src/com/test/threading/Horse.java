@@ -27,7 +27,10 @@ public class Horse extends Thread{
 	private void gallop(int limit){
 		while(distance < limit){
 			step();
-			// System.out.println(getName() + " at " + distance);
+			// if (distance > 10) {
+			// 	distance = 10;
+			// }
+			System.out.println(getName() + " at " + distance );
 		}
 	}
 	public boolean isHealthy(){

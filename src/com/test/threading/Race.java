@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 public class Race {
 	private Scanner sc = new Scanner(System.in);
 	private List<Horse> horses = new ArrayList<Horse>();
@@ -42,10 +43,17 @@ public class Race {
 	public synchronized void waitInGate(){
 		horseInGate++;
 		if (isAllInGate()){
+			System.out.println("All horses are in the Gate!");
 			System.out.println("\n[Set distance from Gate to Finish Line]");
 			do {
-				System.out.println("Must be more than 10 meters.");
-				gateToFinDistance = sc.nextInt();
+				try {
+					System.out.println("Must be more than 10 meters.");
+					gateToFinDistance = sc.nextInt();
+				} catch (InputMismatchException ex){
+					System.out.println("[Invalid distance]");
+					sc.nextLine();
+					gateToFinDistance = 0;
+				}
 			} while (gateToFinDistance <= 10);
 			System.out.println("\nRACE START!\n\n");
 			notifyAll();
