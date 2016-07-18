@@ -1,0 +1,134 @@
+Activity #1
+07-04-16
+
+Objective: Apply basic java knowledge
+Description: Create a java program that generates a 2-Dimensional Array (Table form) of random ASCII characters:
+Functionalities:
+/ on startup, request for user input for table dimension - must not be 0x0
+/ generate 3 random characters per cell on the table with the specified dimension
+/ initial display shows the following menu: search, edit, print, reset, exit
+/ search: -user inputs search character/characters, identify number of occurrence in the table, and identify index of search string - max of 3
+/ edit: specify index to update - invalid index input (datatype)
+/ print: print table
+/ reset: specify new dimensions, new random chars
+/ exit: exit the program
+
+Objective: Display knowledge on OOP Principles, use of collections, and be able to code in java while applying basic coding standards (Oracle's Coding/Naming Convention)
+Description: An enhancement to Exercise 1. Create a java program that generates an N x N table of random ASCII characters. Each table cell will contain a key-value pair (key, value).
+Functionalities:
+File I/O: Read table values from a separate file. Data must be persistent.
+Apply functions(edit,print,search,reset,exit) from Exercise 1
+(NEW) Add new row - adds new row to the table
+(NEW) Sorting rows, concatenate both values in one index before sorting
+so read through ka sa
+OOP Principles
+Collections (Lists, Maps, Sets)
+
+(bb,cc),(cc,ss),(ac,dd) -> bbcc,ccss,acdd - >(ac,dd),(bb,cc),(cc,ss)
+(ii,oo),(ii,oo),(ii,oo) - 
+
+list<map<string,string>>
+
+
+search: aa
+
+[0,0] key-> 1 occurence
+[0,0] value -> 0 occurence
+[0,1[ key -> 1 occurence
+[0,1] value -> 1 occurence
+
+edit : 0,0
+key: bb
+value: cc
+
+reset: 
+r & c
+
+add row
+input: 3pair
+
+1st pair:
+key:
+value:
+
+2nd pari
+
+Synchronized - only one thread can access at a time
+Volatile - can be viewed by multiple threads
+
+List < prang array lang but with added feature like dynamic size instead of fixed
+	Ordered
+	Dynamic size
+- LinkedList
+	Doubly-linked: previous and next element is referenced
+	Useful for adding/removing elements
+- ArrayList
+	Resizeable array
+	Get and set
+- Vector
+	Same as Linkedlist but synchronized
+
+Set < prang list but with single instance of each item lang
+	Ordered
+	Dynamic size
+	Can't have duplicate elements
+- HashSet
+- TreeSet
+- LinkedHashSets
+	
+Map < key value pairs
+	Not ordered
+	Consists of Entries <K,V>
+	Can't contain duplicate key
+- HashMap
+- TreeMap
+- LinkedHashMap
+
+Queue < pra syang List, pero ung pag get ng data is ordered (push() and pop()) FIrst in First Out
+	FIFO
+
+Deque 
+	Double ended Queue
+
+Stack < prang queue pero reveresed ung order (push() and pop() din ata to) First in last out
+	LIFO
+
+____________________________
+
+Objective: Apply knowledge on Threads and Concurrency in Java
+Description: Create a horse racing program. Horses start from the Barn (initial starting point). They first all walk to the Gate (race starting point) at random speed. When all horses arrive at the Gate, the race starts and horses begin the race at the same time.
+Conditions and Functionalities:
+Distance between Barn and Gate: 10 meters
+Distance between Gate and Finish Line: user input
+Number of Horses: user input
+Demonstrate use of Java 8 Streams and Lambda expressions by:
+From the list of horses, each horse will be assigned a random boolean variable named "healthy" to determine if it can be fit to race. Each horse also has a "name" that is in lowercase (ex. horse1, horse2, horse3 etc)
+Filter only healthy horses. If the number of healthy horses is less than 2, Repeat the input for horses. Only healthy horses are allowed to race.
+From the list of healthy horses, each horse name should be converted to uppercase.
+Horse speed is generated randomly for each turn, ranging from 1-10. All generated random number for the horse speed should be generated at the same time and not successively
+When a horse arrives at the Finish Line, print a message with that the horse has finished the race.
+Output display in console. Example, display distance traveled and distance left per horse per turn.
+BONUS: for every turn, the trailing horse will have a boost by having the speed generated randomly from the range 1-20 instead of 1-10.
+[5:54:54 PM] rogelee bandioque: study: Concurrency
+Synchronous and Asynchronous Threads
+Java 8 Streams and Lambda Expressions
+
+for loop // create horses. un lang
+then
+
+raceHorses
+.stream()
+.map(h -> {
+    if(h.isHealthy()){
+       h.setName(h.getName().toUpperCase()); // <- ung part na to, dko sure kugn magpepersist ung bagong name. tho DAPAT kse reference object nmn sya. I mean mag persist hanggang sa labas ng stream na to
+    }
+    return h;
+})
+.forEach(h -> {
+     println h.getName() + " is " + (h.isHealthy() ? "Regeistered" : "Not Registered")
+});
+
+raceHorses = raceHorses
+.stream()
+.filter(Horse::isHealthy)
+.collect(Collector.toList())

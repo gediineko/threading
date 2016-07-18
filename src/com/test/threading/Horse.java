@@ -21,7 +21,7 @@ public class Horse extends Thread{
 		System.out.println("[" + getName() + " reached the Finish Line]");
 		race.addFinishedHorse(this);
 		if (race.isAllFinished()){
-			System.out.println(race.getWinner().getName() + " WINS!");
+			System.out.println("\n" + race.getWinner().getName() + " WINS!\n");
 		}
 	}
 	private void gallop(int limit){

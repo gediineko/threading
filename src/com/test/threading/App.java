@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.stream.Collectors;
 public class App {
 	private Scanner	scanner;
 	private Race race;
+	private List<Horse> horseInput = new ArrayList<>();
 	App(){
 		scanner = new Scanner(System.in);
 		race = new Race();
@@ -18,20 +20,30 @@ public class App {
 		do {
 			int horseCount = 0;
 			race.resetHorses();
+			horseInput.clear();
 			System.out.print("Number of horses: ");
 			try {
 				horseCount = scanner.nextInt();
 				System.out.println("");
 				for (int x = 0; x < horseCount; x++){
 					Horse horse = new Horse("horse" + (x+1), race);
-					if (horse.isHealthy()){
-						horse.setName(horse.getName().toUpperCase());
-						race.addHorses(horse);
-						System.out.println(horse.getName() + ": Healthy, registered to the Race");
+					horseInput.add(horse);
+				    if (horse.isHealthy()){
+						System.out.println(horse.getName().toUpperCase() + ": Healthy, registered to the Race");
 					} else {
 						System.out.println(horse.getName() + ": Not healthy");
 					}
 				}
+				race.raceHorses = horseInput
+				  .stream()
+                  .filter((h) -> h.isHealthy())
+                  .map(h -> {
+                    h.setName(h.getName().toUpperCase());
+                    return h;
+                    })
+                  .collect(Collectors.toList());
+
+
 				if (race.getHorseCount() < 2){
 					System.out.println("\nNot enough healthy horses.");
 					System.out.println("We need more than 1 healthy horses to start the race.");

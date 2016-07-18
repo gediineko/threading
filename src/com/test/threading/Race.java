@@ -6,30 +6,30 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 public class Race {
 	private Scanner sc = new Scanner(System.in);
-	private List<Horse> horses = new ArrayList<Horse>();
+	public List<Horse> raceHorses = new ArrayList<Horse>();
 	private int horseInGate = 0;
 	public static final int BARN_TO_GATE_DISTANCE = 10;
 	public static int gateToFinDistance;
 	private List<Horse> finishedHorses = new LinkedList<>();
 	public void start(){
-		for (Horse horse : horses){
+		for (Horse horse : raceHorses){
 			horse.start();
 		}
 	}
+	public void resetHorses(){
+		raceHorses.clear();
+	}
 	public List<Horse> getHorses(){
-		return horses;
+		return raceHorses;
 	}
 	public int getHorseCount(){
-		return horses.size();
+		return raceHorses.size();
 	}
 	public void addHorses(Horse horse){
-		horses.add(horse);
-	}
-	public void resetHorses(){
-		horses.clear();
+		raceHorses.add(horse);
 	}
 	public boolean isAllInGate(){
-		return horses.size() == horseInGate;
+		return raceHorses.size() == horseInGate;
 	}
 	public void addFinishedHorse(Horse horse){
 		finishedHorses.add(horse);
