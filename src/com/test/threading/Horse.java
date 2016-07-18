@@ -18,7 +18,7 @@ public class Horse extends Thread{
 		race.waitInGate();
 		distance = 0;
 		gallop(Race.gateToFinDistance);
-		System.out.println(getName() + " reached the Finish Line.");
+		System.out.println("[" + getName() + " reached the Finish Line]");
 		race.addFinishedHorse(this);
 		if (race.isAllFinished()){
 			System.out.println(race.getWinner().getName() + " WINS!");
@@ -27,10 +27,12 @@ public class Horse extends Thread{
 	private void gallop(int limit){
 		while(distance < limit){
 			step();
-			// if (distance > 10) {
-			// 	distance = 10;
-			// }
-			System.out.println(getName() + " at " + distance );
+			if (limit == Race.BARN_TO_GATE_DISTANCE && distance > Race.BARN_TO_GATE_DISTANCE) {
+			 	distance = 10;
+			} else if (limit == Race.gateToFinDistance && distance > Race.gateToFinDistance){
+				distance = Race.gateToFinDistance;
+			}
+			System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining" );
 		}
 	}
 	public boolean isHealthy(){

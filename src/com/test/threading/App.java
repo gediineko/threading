@@ -14,7 +14,7 @@ public class App {
 		new App().run();
 	}
 	public void run(){
-		System.out.println("[Horse Racing App: Register horses, must be more than 1]");
+		System.out.println("[Horse Racing App: Register horses]");
 		do {
 			int horseCount = 0;
 			race.resetHorses();
@@ -23,12 +23,13 @@ public class App {
 				horseCount = scanner.nextInt();
 				System.out.println("");
 				for (int x = 0; x < horseCount; x++){
-					Horse horse = new Horse("HORSE " + (x+1), race);
+					Horse horse = new Horse("horse" + (x+1), race);
 					if (horse.isHealthy()){
+						horse.setName(horse.getName().toUpperCase());
 						race.addHorses(horse);
-						System.out.println(horse.getName() + ": Healthy, registered to the Race.");
+						System.out.println(horse.getName() + ": Healthy, registered to the Race");
 					} else {
-						System.out.println(horse.getName() + ": Not healthy.");
+						System.out.println(horse.getName() + ": Not healthy");
 					}
 				}
 				if (race.getHorseCount() < 2){
