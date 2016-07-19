@@ -29,11 +29,12 @@ public class App {
 					Horse horse = new Horse("horse" + (x+1), race);
 					horseInput.add(horse);
 				    if (horse.isHealthy()){
-						System.out.println(horse.getName().toUpperCase() + ": Healthy, registered to the Race");
+						System.out.println(horse.getName() + ": Healthy, registered to the Race");
 					} else {
 						System.out.println(horse.getName() + ": Not healthy");
 					}
 				}
+				//Filter healthy horses from horseInput to raceHorses
 				race.raceHorses = horseInput
 				  .stream()
                   .filter((h) -> h.isHealthy())
@@ -42,8 +43,7 @@ public class App {
                     return h;
                     })
                   .collect(Collectors.toList());
-
-
+                //Make sure there are 2 or more healthy horses
 				if (race.getHorseCount() < 2){
 					System.out.println("\nNot enough healthy horses.");
 					System.out.println("We need more than 1 healthy horses to start the race.");
@@ -52,7 +52,6 @@ public class App {
 				System.out.println("[Invalid input]");
 				scanner.nextLine();
 			}
-
 		} while (race.getHorseCount() < 2);
 		race.start();
 	}

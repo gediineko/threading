@@ -43,7 +43,7 @@ public class Race {
 	public synchronized void waitInGate(){
 		horseInGate++;
 		if (isAllInGate()){
-			System.out.println("[All horses are in the Gate]");
+			System.out.println("[All " + raceHorses.size() + " horses are in the Gate]");
 			System.out.println("\n[Set distance from Gate to Finish Line]");
 			do {
 				try {

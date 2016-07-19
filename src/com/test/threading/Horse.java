@@ -7,6 +7,8 @@ public class Horse extends Thread{
 	private int distance;
 	private Random rand = new Random();
 	private Race race;
+	private static final int SPEED = 10;
+	private static final int BOOST_SPEED = 20;
 	Horse(String name, Race race){
 			super(name);
 			this.healthy = rand.nextBoolean();
@@ -26,25 +28,30 @@ public class Horse extends Thread{
 	}
 	private void gallop(int limit){
 		while(distance < limit){
-			step();
-			if (limit == Race.BARN_TO_GATE_DISTANCE && distance > Race.BARN_TO_GATE_DISTANCE) {
-			 	distance = 10;
-			} else if (limit == Race.gateToFinDistance && distance > Race.gateToFinDistance){
+			//Sort the horses order per turn
+			List<Horse> horseOrder = race.getHorses()
+				.stream()
+				.sorted((h1, h2) -> Integer.compare(h1.getDistance(), h2.getDistance()))
+				.collect(Collectors.toList());
+			//Boost horse if they are trailing
+			boolean boost = horseOrder.get(0).getName().equals(getName());
+			distance += (rand.nextInt(boost && race.isAllInGate() ? BOOST_SPEED : SPEED)+1);
+			//Make sure horse will not go over the barn or finish line
+			if (!race.isAllInGate() && distance > Race.BARN_TO_GATE_DISTANCE) {
+			 	distance = Race.BARN_TO_GATE_DISTANCE;
+			} else if (race.isAllInGate() && distance > Race.gateToFinDistance){
 				distance = Race.gateToFinDistance;
 			}
-			System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining" );
+			//Print horse status
+			if (boost && race.isAllInGate()){
+				System.out.println("Boost! " + getName() + " at " + distance + "m; " + (limit-distance) + "m remaining");
+			} else {		
+				System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining" );
+			}		
 		}
 	}
 	public boolean isHealthy(){
 		return healthy;
-	}
-	public void step(){
-		List<Horse> horses = race.getHorses()
-			.stream()
-			.sorted((h1, h2) -> Integer.compare(h1.getDistance(), h2.getDistance()))
-			.collect(Collectors.toList());
-		boolean boost = horses.get(0).getName().equals(getName());
-		distance += (rand.nextInt(boost && race.isAllInGate() ? 20 : 10)+1);
 	}
 	public int getDistance(){
 		return distance;
