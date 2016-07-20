@@ -44,9 +44,9 @@ public class Horse extends Thread{
 			}
 			//Print horse status
 			if (boost && race.isAllInGate()){
-				System.out.println("Boost! " + getName() + " at " + distance + "m; " + (limit-distance) + "m remaining");
+				System.out.println("Boost! " + getName() + " at " + distance + "m; " + (limit-distance) + "m remaining " /*+ System.currentTimeMillis()*/);
 			} else {		
-				System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining" );
+				System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining " /*+ System.currentTimeMillis()*/);
 			}		
 		}
 	}
