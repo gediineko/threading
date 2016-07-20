@@ -37,7 +37,7 @@ public class App {
 				//Filter healthy horses from horseInput to raceHorses
 				race.raceHorses = horseInput
 				  .stream()
-                  .filter((h) -> h.isHealthy())
+                  .filter(/*h -> h.isHealthy()*/Horse::isHealthy)
                   .map(h -> {
                     h.setName(h.getName().toUpperCase());
                     return h;
