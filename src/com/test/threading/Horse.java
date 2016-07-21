@@ -34,7 +34,10 @@ public class Horse extends Thread{
 				.sorted((h1, h2) -> Integer.compare(h1.getDistance(), h2.getDistance()))
 				.collect(Collectors.toList());
 			//Boost horse if they are trailing
-			boolean boost = horseOrder.get(0).getName().equals(getName());
+			boolean boost = horseOrder
+				.get(0)
+				.getName()
+				.equals(getName());
 			distance += (rand.nextInt(boost && race.isAllInGate() ? BOOST_SPEED : SPEED)+1);
 			//Make sure horse will not go over the barn or finish line
 			if (!race.isAllInGate() && distance > Race.BARN_TO_GATE_DISTANCE) {
@@ -42,12 +45,7 @@ public class Horse extends Thread{
 			} else if (race.isAllInGate() && distance > Race.gateToFinDistance){
 				distance = Race.gateToFinDistance;
 			}
-			//Print horse status
-			if (boost && race.isAllInGate()){
-				System.out.println("Boost! " + getName() + " at " + distance + "m; " + (limit-distance) + "m remaining " /*+ System.currentTimeMillis()*/);
-			} else {		
-				System.out.println(getName() + " at " + distance + "m; " + (limit-distance) + "m remaining " /*+ System.currentTimeMillis()*/);
-			}		
+			printStatus(limit, boost);	
 		}
 	}
 	public boolean isHealthy(){
@@ -55,6 +53,15 @@ public class Horse extends Thread{
 	}
 	public int getDistance(){
 		return distance;
+	}
+	public void printStatus(int limit, boolean boost){
+		System.out.println((boost && race.isAllInGate() ? "Boost! " : "") 
+			+ getName() 
+			+ " at " 
+			+ distance 
+			+ "m; " 
+			+ (limit-distance) 
+			+ "m remaining " /*+ System.currentTimeMillis()*/);
 	}
 	
 }
