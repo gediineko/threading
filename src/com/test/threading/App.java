@@ -28,16 +28,15 @@ public class App {
 				for (int x = 0; x < horseCount; x++){
 					Horse horse = new Horse("horse" + (x+1), race);
 					horseInput.add(horse);
-				    if (horse.isHealthy()){
-						System.out.println(horse.getName() + ": Healthy, registered to the Race");
-					} else {
-						System.out.println(horse.getName() + ": Not healthy");
-					}
+					System.out.println(horse.getName() 
+						+ (horse.isHealthy() 
+							? ": Healthy, registered to the Race" 
+							: ": Not healthy"));
 				}
 				//Filter healthy horses from horseInput to raceHorses
 				race.raceHorses = horseInput
 				  .stream()
-                  .filter(/*h -> h.isHealthy()*/Horse::isHealthy)
+                  .filter(Horse::isHealthy) /*h -> h.isHealthy()*/
                   .map(h -> {
                     h.setName(h.getName().toUpperCase());
                     return h;

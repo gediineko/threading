@@ -61,7 +61,7 @@ public class Horse extends Thread{
 			+ distance 
 			+ "m; " 
 			+ (limit-distance) 
-			+ "m remaining " /*+ System.currentTimeMillis()*/);
+			+ "m remaining ");
 	}
 	
 }
